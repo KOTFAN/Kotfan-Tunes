@@ -7,7 +7,7 @@ import { genres } from './../assets/constants';
 import { useGetTopChartsQuery } from '../redux/services/YoutubeMusic';
 
 
-import { useGetGenresQuery } from '../redux/services/MusicTracks';
+import { useGetGenresQuery, useGetTracksQuery } from '../redux/services/MusicTracks';
 
 const Discover = () => {
    const dispatch = useDispatch();
@@ -17,7 +17,9 @@ const Discover = () => {
 
    const { data: genresData, isFetching: genresIsFetching, error: genresError } = useGetGenresQuery();
 
-   console.log(genresData, genresIsFetching, genresError)
+   const { data: tracksData, isFetching: tracksIsFetching, error: tracksError } = useGetTracksQuery();
+
+   console.log(tracksData, tracksIsFetching, tracksError)
 
    if (isFetching) return <Loader title='Loading Best Ever Songs...' />
 
@@ -39,9 +41,9 @@ const Discover = () => {
          </div>
          <div className="flex flex-wrap sm:justify-start justify-center gap-8">
             {/* map on result arr */}
-            {data?.result?.map((song, i) => (
+            {tracksData?.data?.map((song, i) => (
                <SongCard
-                  key={song.videoId}
+                  key={song.id}
                   song={song}
                   i={i}
                   activeSong={activeSong}

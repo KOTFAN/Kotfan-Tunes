@@ -32,17 +32,17 @@ const SongCard = ({ song, i, isPlaying, activeSong, data }) => {
                   activeSong={activeSong}
                />
             </div>
-            <img className='w-full h-full object-cover ' src={song?.thumbnail} alt="song_img" />
+            <img className='w-full h-full object-cover ' src={song?.coverImage} alt="song_img" />
          </div>
          <div className="mt-4 flex flex-col">
             <p className='font-semibold text-lg text-text truncate inline-block' >
-               <Link to={`/songs/${song?.videoId}`}>
+               <Link to={`/songs/${song?.slug}`}>
                   {song.title}
                </Link>
             </p>
             <p className='mt-1 font-semibold text-sm text-gray-300 truncate inline-block'>
-               <Link to={`/songs/${song?.author}`}>
-                  {song.author}
+               <Link to={`/songs/${song?.artist}`}>
+                  {song.artist}
                </Link>
             </p>
          </div>

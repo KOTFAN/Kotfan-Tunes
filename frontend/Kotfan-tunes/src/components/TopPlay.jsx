@@ -9,6 +9,8 @@ import { playPause, setActiveSong } from '../redux/features/playerSlice'
 
 import { useGetTopChartsQuery } from '../redux/services/YoutubeMusic';
 
+import { useGetTracksQuery } from "../redux/services/MusicTracks";
+
 import 'swiper/css'
 import 'swiper/css/free-mode'
 import { TopCharts } from "../pages";
@@ -24,13 +26,13 @@ const TopChartCard = ({ song, i, isPlaying, activeSong, handlePauseClick, handle
          </h3>
 
          <div className="flex-1 flex flex-row justify-between items-center">
-            <img className="w-20 h-20 rounded-lg " src={song?.thumbnail} alt="musicImg" />
+            <img className="w-20 h-20 rounded-lg " src={song?.coverImage} alt="musicImg" />
             <div className="flex-1 flex flex-col justify-center mx-3">
-               <Link to={`/songs/${song.videoId}`} >
-                  <p className="text-xl font-bold text-text">{song.title} </p>
+               <Link to={`/songs/${song.slug}`} >
+                  <p className="text-xl font-bold text-text">{song?.title} </p>
                </Link>
-               <Link to={`/artists/${song.author}`} >
-                  <p className="text-sm font-bold text-gray-300">{song.author} </p>
+               <Link to={`/artists/${song.artist}`} >
+                  <p className="text-sm font-bold text-gray-300">{song?.artist} </p>
                </Link>
             </div>
          </div>
@@ -53,13 +55,15 @@ const TopPlay = () => {
    const { data } = useGetTopChartsQuery();
    const divRef = useRef(null)
 
+
+   const { data: songsData } = useGetTracksQuery();
    useEffect(() => {
       divRef.current?.scrollIntoView({ behavior: 'smooth' });
    }, []);
 
 
 
-   const topSongs = data?.result?.slice(0, 5);
+   const topSongs = songsData?.data?.slice(0, 5);
 
    const handlePauseClick = () => {
       dispatch(playPause(false))
@@ -90,7 +94,7 @@ const TopPlay = () => {
                (<TopChartCard
                   song={song}
                   i={i}
-                  key={song.videoId}
+                  key={song.id}
                   isPlaying={isPlaying}
                   activeSong={activeSong}
                   handlePauseClick={handlePauseClick}
@@ -99,25 +103,7 @@ const TopPlay = () => {
             </div>
          </div>
 
-         {/* here is slider witht top authors but img here temporary of song img */}
-         <div className="w-full flex flex-col mt-8 ">
-            <div className="flex flex-row justify-between items-center" >
-               <h2 className="text-text font-bold text-2xl ">TOP ARTISTS</h2>
-               <Link to={'/top-artists'}>
-                  <p className="text-gray-300 cursor-pointer text-base">See more</p>
-               </Link>
-            </div>
 
-            <Swiper slidesPerView='auto' spaceBetween={15} freeMode modules={[FreeMode]} className="mt-4">
-               {data && topSongs.map((song, i) => (<SwiperSlide key={song?.videoId} style={{ 'width': '25%', 'height': 'auto' }} className="shadow-lg rounded-full animate-slideright ">
-                  <Link to={`/artists/${song?.author}`}>
-                     <img src={song?.thumbnail} alt="Image" className="rounded-full w-full object-cover" />
-                  </Link>
-               </SwiperSlide>)
-
-               )}
-            </Swiper >
-         </div>
       </div>
    )
 

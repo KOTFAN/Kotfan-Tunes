@@ -85,7 +85,7 @@ const MusicPlayer = () => {
                currentIndex={currentIndex}
                onEnded={handleNextSong}
                onTimeUpdate={(event) => setAppTime(event.target.currentTime)}
-               onLoadedData={() => setDuration(activeSong?.duration)}//bug here
+               onLoadedData={(event) => setDuration(event.target.duration)}//bug here
             />
          </div>
          <VolumeBar value={volume} min="0" max="1" onChange={(event) => setVolume(event.target.value)} setVolume={setVolume} />
