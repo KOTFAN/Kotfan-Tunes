@@ -14,50 +14,52 @@ const playerSlice = createSlice({
    initialState,
    reducers: {
       setActiveSong: (state, action) => {
-
-
-
-
          state.activeSong = action.payload.song;
 
-         if (action.payload?.data?.result) {
-            state.currentSongs = action.payload?.data?.result;
-         } else {
-            state.currentSongs = action.payload.data.result;
-         }
 
-         // console.log(action.payload.i)
+
+
+         if (Array.isArray(action.payload?.data)) {
+            state.currentSongs = action.payload.data;
+
+         } else {
+            state.currentSongs = [];
+         }
 
          state.currentIndex = action.payload.i;
          state.isActive = true;
+
+         console.log(action.payload.song)
+
       },
 
       nextSong: (state, action) => {
-         if (state.currentSongs[action.payload]?.track) {
-            state.activeSong = state.currentSongs[action.payload]?.track;
-         } else {
-            state.activeSong = state.currentSongs[action.payload];
-         }
+         const nextIndex = action.payload;
+         const nextSong = state.currentSongs[nextIndex];
 
-         state.currentIndex = action.payload;
-         state.isActive = true;
+         if (nextSong) {
+            state.activeSong = nextSong;
+            state.currentIndex = nextIndex;
+            state.isActive = true;
+         }
       },
-
       prevSong: (state, action) => {
-         if (state.currentSongs[action.payload]?.track) {
-            state.activeSong = state.currentSongs[action.payload]?.track;
-         } else {
-            state.activeSong = state.currentSongs[action.payload];
-         }
+         const prevIndex = action.payload;
+         const prevSong = state.currentSongs[prevIndex];
 
-         state.currentIndex = action.payload;
-         state.isActive = true;
+         if (prevSong) {
+            state.activeSong = prevSong;
+            state.currentIndex = prevIndex;
+            state.isActive = true;
+         }
       },
 
       playPause: (state, action) => {
-         // console.log('set')
+
 
          state.isPlaying = action.payload;
+
+         // console.log(state.isPlaying)
       },
 
       selectGenreListId: (state, action) => {

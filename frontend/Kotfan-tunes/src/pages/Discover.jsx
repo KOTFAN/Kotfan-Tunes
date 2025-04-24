@@ -2,9 +2,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 import { Error, Loader, SongCard } from '../components';
-import { genres } from './../assets/constants';
-
-import { useGetTopChartsQuery } from '../redux/services/YoutubeMusic';
 
 
 import { useGetGenresQuery, useGetTracksQuery } from '../redux/services/MusicTracks';
@@ -13,17 +10,14 @@ const Discover = () => {
    const dispatch = useDispatch();
    const { activeSong, isPlaying } = useSelector((state) => state.player);
 
-   const { data, isFetching, error } = useGetTopChartsQuery();
-
    const { data: genresData, isFetching: genresIsFetching, error: genresError } = useGetGenresQuery();
 
    const { data: tracksData, isFetching: tracksIsFetching, error: tracksError } = useGetTracksQuery();
 
-   console.log(tracksData, tracksIsFetching, tracksError)
 
-   if (isFetching) return <Loader title='Loading Best Ever Songs...' />
+   if (tracksIsFetching) return <Loader title='Loading Songs...' />
 
-   if (error) return <Error />
+   if (tracksError) return <Error />
 
 
    return (
@@ -32,14 +26,11 @@ const Discover = () => {
             <h2 className="font-bold text-text text-3xl text-shadow-sm">Discover</h2>
             <select name="genre" id="1" value='' onChange={() => { }}
                className='bg-black text-gray-300 p-3 text-sm outline-none rounded-lg sm:mt-0 mt-5'>
-               {genresData.map((ganre, i) => {
-                  console.log(ganre)
-                  return <option key={i} value={ganre}>{ganre}</option>
-               })}
+               {genresData.map((ganre, i) => <option key={i} value={ganre}>{ganre}</option>)}
             </select>
 
          </div>
-         <div className="flex flex-wrap sm:justify-start justify-center gap-8">
+         <div className="flex flex-wrap xl:justify-start justify-center gap-8">
             {/* map on result arr */}
             {tracksData?.data?.map((song, i) => (
                <SongCard
@@ -48,7 +39,7 @@ const Discover = () => {
                   i={i}
                   activeSong={activeSong}
                   isPlaying={isPlaying}
-                  data={data}
+                  data={tracksData.data}
                />
             ))}
          </div>

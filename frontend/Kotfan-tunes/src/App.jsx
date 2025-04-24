@@ -1,32 +1,40 @@
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
-import { Searchbar, Sidebar, MusicPlayer, TopPlay } from './components';
-import { ArtistDetails, TopArtists, AroundYou, Discover, Search, SongDetails, TopCharts } from './pages';
+import { Searchbar, MusicPlayer, RecentlyAdded } from './components';
+import { ArtistDetails, Discover, Search, SongDetails } from './pages';
 
+import logo from './assets/logo.png'
 const App = () => {
    const { activeSong } = useSelector((state) => state.player);
 
    return (
       <div className="relative flex">
-         <Sidebar />
-         <div className="flex-1 flex flex-col bg-gradient-to-tr from-bg to-main">
-            <Searchbar />
 
-            <div className="px-6 h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse">
+         <div className="flex-1 flex flex-col bg-gradient-to-tr from-bg to-main">
+            <div className="flex items-center justify-between px-6 py-4">
+               <img src={logo} alt="Logo" className="h-10 w-auto" />
+               <div className="flex-1 ml-4">
+                  <Searchbar />
+               </div>
+               <div className="addTrack">
+                  <button type="button" className='text-text text-base pt-2 pb-2 pr-4 pl-4 bg-secondary hover:bg-bgHover hover:text-textHover transition-colors rounded-sm'>Add track</button>
+               </div>
+            </div>
+
+            <div className="px-6 h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex md:flex-row flex-col-reverse md:gap-x-4 gap-x-0">
                <div className="flex-1 h-fit pb-40">
                   <Routes>
-                     <Route path="/" element={<Discover />} />
-                     <Route path="/top-artists" element={<TopArtists />} />
-                     <Route path="/top-charts" element={<TopCharts />} />
-                     <Route path="/around-you" element={<AroundYou />} />
+                     <Route path="/" element={<div />} />
+                     <Route path="/tracks" element={<div />} />
+                     <Route path="/discover" element={<Discover />} />
                      <Route path="/artists/:id" element={<ArtistDetails />} />
                      <Route path="/songs/:songid" element={<SongDetails />} />
                      <Route path="/search/:searchTerm" element={<Search />} />
                   </Routes>
                </div>
                <div className="xl:sticky relative top-0 h-fit">
-                  <TopPlay />
+                  <RecentlyAdded />
                </div>
             </div>
          </div>

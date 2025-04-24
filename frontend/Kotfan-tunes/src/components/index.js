@@ -1,7 +1,7 @@
 import Sidebar from './Sidebar';
 import Searchbar from './Searchbar';
 import SongCard from './SongCard';
-import TopPlay from './TopPlay';
+import RecentlyAdded from './RecentlyAdded';
 import ArtistCard from './ArtistCard';
 import DetailsHeader from './DetailsHeader';
 import SongBar from './SongBar';
@@ -11,15 +11,15 @@ import Loader from './Loader';
 import Error from './Error';
 
 export {
-  TopPlay,
-  Sidebar,
-  SongCard,
-  Searchbar,
-  ArtistCard,
-  DetailsHeader,
-  SongBar,
-  RelatedSongs,
-  MusicPlayer,
-  Loader,
-  Error,
+   RecentlyAdded,
+   Sidebar,
+   SongCard,
+   Searchbar,
+   ArtistCard,
+   DetailsHeader,
+   SongBar,
+   RelatedSongs,
+   MusicPlayer,
+   Loader,
+   Error,
 };

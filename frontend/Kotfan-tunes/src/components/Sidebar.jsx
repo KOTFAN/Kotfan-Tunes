@@ -16,10 +16,7 @@ const SidebarLinks = (handleCkick) => (
             className={({ isActive }) =>
                `flex justify-start items-center flex-row my-8 text-sm font-medium
                ${isActive ? 'text-textHover' : 'text-text'} hover:text-textHover`
-            }
-
-         >
-            {/* OMG */}
+            }>
             <item.icon className="w-6 h-6 mr-2" />
             {item.name}
          </NavLink>
@@ -37,7 +34,7 @@ const Sidebar = () => {
             <img src={logo} alt="Logo" className="w-full h-14 object-contain" />
             <SidebarLinks />
          </div>
-         {/* burger munu */}
+         {/* burger menu */}
          <div className="absolute md:hidden block top-6 right-3 cursor-pointer">
             {isMobileMenuOpen ?
                (<RiCloseLine className="w-6 h-6 text-white mr-2" onClick={() => setMobileMenuOpen(false)} />)

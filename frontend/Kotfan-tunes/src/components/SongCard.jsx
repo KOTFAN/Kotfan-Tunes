@@ -4,9 +4,13 @@ import { useDispatch } from 'react-redux';
 import PlayPause from './PlayPause';
 import { playPause, setActiveSong } from '../redux/features/playerSlice';
 
+import logo from '../assets/logo.png'//change to "fallback image"
+
 
 
 const SongCard = ({ song, i, isPlaying, activeSong, data }) => {
+
+   // console.log(song, i, isPlaying, activeSong, data)
 
    const dispatch = useDispatch()
 
@@ -32,7 +36,10 @@ const SongCard = ({ song, i, isPlaying, activeSong, data }) => {
                   activeSong={activeSong}
                />
             </div>
-            <img className='w-full h-full object-cover ' src={song?.coverImage} alt="song_img" />
+            <img className='w-full h-full object-cover ' src={song?.coverImage || logo} alt="song_img" onError={(e) => {
+               e.target.onerror = null;
+               e.target.src = logo;
+            }} />
          </div>
          <div className="mt-4 flex flex-col">
             <p className='font-semibold text-lg text-text truncate inline-block' >

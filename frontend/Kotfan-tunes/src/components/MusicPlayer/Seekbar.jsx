@@ -1,11 +1,9 @@
+
 import React from 'react';
 
 const Seekbar = ({ value, min, max, onInput, setSeekTime, appTime }) => {
-   //max is count from audio in sec (so i need just audio)
-   // max = 180
+   // converts the time to format 0:00
    const getTime = (time) => `${Math.floor(time / 60)}:${(`0${Math.floor(time % 60)}`).slice(-2)}`;
-
-   // console.log(max)
 
    return (
       <div className="hidden sm:flex flex-row items-center">
@@ -22,7 +20,7 @@ const Seekbar = ({ value, min, max, onInput, setSeekTime, appTime }) => {
             onInput={onInput}
             className="md:block w-24 md:w-56 2xl:w-96 h-1 mx-4 2xl:mx-6 rounded-lg"
          />
-         <p className="text-white">{max === 0 ? '0:00' : max}</p>
+         <p className="text-white">{max === 0 ? '0:00' : getTime(max)}</p>
          <button type="button" onClick={() => setSeekTime(appTime + 5)} className="hidden lg:ml-4 lg:block text-white">
             +
          </button>

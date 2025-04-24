@@ -2,8 +2,13 @@
 import React, { useRef, useEffect } from 'react';
 
 const Player = ({ activeSong, isPlaying, volume, seekTime, onEnded, onTimeUpdate, onLoadedData, repeat }) => {
+   const musicAdress = activeSong?.audioFile ? `http://localhost:8000/api/files/${activeSong.audioFile}` : 'https://storage.xpleer.com/get_file/?fileId=4_zd4bdb41e2251a7768a8b0616_f201c7d1970d0acb9_d20230612_m211533_c003_v0312004_t0004_u01686604533593'
 
-   // debugger;
+
+   // console.log(musicAdress)
+
+
+
    const ref = useRef(null);
    // eslint-disable-next-line no-unused-expressions
    if (ref.current) {
@@ -21,11 +26,12 @@ const Player = ({ activeSong, isPlaying, volume, seekTime, onEnded, onTimeUpdate
    useEffect(() => {
       ref.current.currentTime = seekTime;
    }, [seekTime]);
+   //here is audio set
 
+   // console.log(ref, repeat, onEnded, onTimeUpdate, onLoadedData, activeSong?.hub?.actions[1]?.uri)
    return (
       <audio
-         //neads to be yt music acual audio sourse) from activeSong
-         src={'https://cdn2.drivemusic.club/dl/online/OGqR5Rpp_0NKOxcKOSAcdw/1745390269/download_music/2014/02/okean-jelzy-911.mp3'}
+         src={musicAdress}
          ref={ref}
          loop={repeat}
          onEnded={onEnded}
