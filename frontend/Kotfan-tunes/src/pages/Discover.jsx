@@ -7,13 +7,17 @@ import { genres } from './../assets/constants';
 import { useGetTopChartsQuery } from '../redux/services/YoutubeMusic';
 
 
+import { useGetGenresQuery } from '../redux/services/MusicTracks';
+
 const Discover = () => {
    const dispatch = useDispatch();
    const { activeSong, isPlaying } = useSelector((state) => state.player);
 
    const { data, isFetching, error } = useGetTopChartsQuery();
 
-   // const ganreTitle = genres[0].title
+   const { data: genresData, isFetching: genresIsFetching, error: genresError } = useGetGenresQuery();
+
+   console.log(genresData, genresIsFetching, genresError)
 
    if (isFetching) return <Loader title='Loading Best Ever Songs...' />
 
@@ -26,8 +30,9 @@ const Discover = () => {
             <h2 className="font-bold text-text text-3xl text-shadow-sm">Discover</h2>
             <select name="genre" id="1" value='' onChange={() => { }}
                className='bg-black text-gray-300 p-3 text-sm outline-none rounded-lg sm:mt-0 mt-5'>
-               {genres.map((ganre) => {
-                  return <option key={ganre.value} value={ganre.value}>{ganre.title}</option>
+               {genresData.map((ganre, i) => {
+                  console.log(ganre)
+                  return <option key={i} value={ganre}>{ganre}</option>
                })}
             </select>
 
