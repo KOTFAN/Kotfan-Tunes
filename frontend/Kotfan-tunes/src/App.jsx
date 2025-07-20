@@ -6,6 +6,7 @@ import { ArtistDetails, Discover, Search, SongDetails } from "./pages";
 
 import Tracks from "./pages/Tracks";
 import Navigation from "./components/Navigation";
+import NotFound from "./pages/NotFound";
 const App = () => {
   const { activeSong } = useSelector((state) => state.player);
 
@@ -24,7 +25,7 @@ const App = () => {
               <Route path="/discover" element={<Discover />} />
               <Route path="/artists/:id" element={<ArtistDetails />} />
               <Route path="/songs/:songid" element={<SongDetails />} />
-              <Route path="/search/:searchTerm" element={<Search />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
           {/* <div className="xl:sticky relative top-0 h-fit">
