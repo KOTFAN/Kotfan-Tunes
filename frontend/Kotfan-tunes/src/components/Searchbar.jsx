@@ -1,6 +1,3 @@
-
-const Searchbar = () => (
-   <div className="">SEARCH Tracks</div>
-);
+const Searchbar = () => <div className="">SEARCH Tracks</div>;
 
 export default Searchbar;

@@ -1,23 +1,18 @@
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 
-import { Searchbar, MusicPlayer, RecentlyAdded } from "./components";
+import { MusicPlayer, RecentlyAdded } from "./components";
 import { ArtistDetails, Discover, Search, SongDetails } from "./pages";
 
-import logo from "./assets/logo.png";
 import Tracks from "./pages/Tracks";
+import Navigation from "./components/Navigation";
 const App = () => {
   const { activeSong } = useSelector((state) => state.player);
 
   return (
     <div className="relative flex">
       <div className="flex-1 flex flex-col bg-gradient-to-tr from-bg to-main">
-        <div className="flex items-center justify-between px-6 py-4">
-          <img src={logo} alt="Logo" className="h-10 w-auto" />
-          <div className="flex-1 ml-4">
-            <Searchbar />
-          </div>
-        </div>
+        <Navigation />
 
         <div className="px-6 h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex md:flex-row flex-col-reverse md:gap-x-4 gap-x-0">
           <div className="flex-1 h-fit pb-40">
