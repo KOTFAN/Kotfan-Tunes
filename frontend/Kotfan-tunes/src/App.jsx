@@ -12,7 +12,10 @@ const App = () => {
 
   return (
     <div className="relative flex">
-      <div className="flex-1 flex flex-col bg-gradient-to-tr from-bg to-main">
+      <div
+        className="flex-1 flex flex-col bg-gradient-to-br from-[#FF6EC7] via-[#FF8C00] to-[#FFD800]
+"
+      >
         <Navigation />
 
         <div className="px-6 h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex md:flex-row flex-col-reverse md:gap-x-4 gap-x-0">
