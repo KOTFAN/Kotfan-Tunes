@@ -1,12 +1,11 @@
+import { Button } from "./ui/8bit/button";
+
 export const AddTrackButton = () => {
   return (
     <div className="addTrack">
-      <button
-        type="button"
-        className="text-text text-base pt-2 pb-2 pr-4 pl-4 bg-secondary hover:bg-bgHover hover:text-textHover transition-colors rounded-sm"
-      >
+      <Button type="button" className="text-text text-base mt-2">
         Add track
-      </button>
+      </Button>
     </div>
   );
 };
